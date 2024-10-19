@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMQ Proposal Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('reporting.jpg');
+            background-size: cover;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: blue;
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: gold; /* Change to golden colour */
+            color: black; /* Change text colour to black */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold; /* Make text bold */
+            transition: box-shadow 0.3s; /* Smooth transition for glow effect */
+        }
+        button:hover {
+            box-shadow: 0 0 20px gold; /* Glowing effect on hover */
+        }
+        .home-button {
+            background-color: green;
+            margin-top: 10px;
+        }
+        .home-button:hover {
+            background-color: darkgreen;
+        }
+        .email-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Master Editors</h1>
+        <form id="submissionForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="studentNumber">Student Number:</label>
+            <input type="text" id="studentNumber" name="studentNumber" required>
+
+            <label for="title">Title of the Study:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="submissionDate">Date for Submission of Assignment 1:</label>
+            <input type="date" id="submissionDate" name="submissionDate" required>
+
+            <label for="group">Group:</label>
+            <select id="group" name="group" required>
+                <option value="NMQ LSG">NMQ LSG</option>
+                <option value="NMQ ELP">NMQ ELP</option>
+            </select>
+
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" rows="4" required></textarea>
+
+            <label for="turnitinReport">Turnitin Report:</label>
+            <input type="file" id="turnitinReport" name="turnitinReport" required>
+
+            <button type="button" onclick="generatePDF()">Submit</button>
+            <button type="button" class="home-button" onclick="goHome()">Return Home</button>
+        </form>
+
+        <a id="emailLink" class="email-link" href="#" style="display:none;">Email Submission</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const name = document.getElementById('name').value;
+            const studentNumber = document.getElementById('studentNumber').value;
+            const title = document.getElementById('title').value;
+            const submissionDate = document.getElementById('submissionDate').value;
+            const group = document.getElementById('group').value;
+
+            doc.setFontSize(20);
+            doc.setTextColor('blue');
+            doc.text('Master Editors', 105, 20, { align: 'center' });
+
+            doc.setFontSize(12);
+            doc.setTextColor('black');
+            doc.text(`Name: ${name}`, 20, 40);
+            doc.text(`Student Number: ${studentNumber}`, 20, 50);
+            doc.text(`Title of the Study: ${title}`, 20, 60);
+            doc.text(`Date for Submission of Assignment 1: ${submissionDate}`, 20, 70);
+            doc.text(`Group: ${group}`, 20, 80);
+            doc.text('This assignment will be considered for research and review within 1 week.', 20, 100);
+            doc.text('You will receive feedback via email, which will include suggestions for improvements and any necessary clarifications.', 20, 110);
+            doc.text('Please ensure your contact details are up to date to avoid missing any communications.', 20, 120);
+            doc.text('If you have any questions or concerns regarding your submission, feel free to reach out to your course coordinator.', 20, 130);
+
+            const fileName = 'submission.pdf';
+            doc.save(fileName);
+
+            // Create the email link after generating the PDF
+            const emailLink = document.getElementById('emailLink');
+            emailLink.href = `mailto:chibhamubenjuniortakunda@gmail.com?subject=Submission for ${title}&body=Please find attached the submitted PDF for ${title}.`;
+            emailLink.style.display = 'block';
+            
+            // Play sound and read the message
+            playSound();
+            readAloud("Your email will be sent directly to Master Editors for review.");
+        }
+
+        function playSound() {
+            const audio = new Audio('notification-sound.mp3'); // Path to your sound file
+            audio.play();
+        }
+
+        function readAloud(message) {
+            const utterance = new SpeechSynthesisUtterance(message);
+            utterance.voice = speechSynthesis.getVoices().find(voice => voice.name === 'Google UK English Male'); // Change as needed
+            speechSynthesis.speak(utterance);
+        }
+
+        function goHome() {
+            window.location.href = 'Main index.html'; // Change this to your home page URL
+        }
+
+        // Wait for voices to be loaded
+        window.speechSynthesis.onvoiceschanged = function() {
+            const voices = speechSynthesis.getVoices();
+            console.log(voices); // This will log the available voices in the console
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+/* Reset some basic elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Adding background image to the entire page */
+body {
+    background-image: url('0_VZbOboJwAM5aLtwF.jpg'); /* Ensure the image path is correct */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents repeating of the image */
+    background-attachment: fixed; /* Makes the background stay fixed when scrolling */
+    font-family: Arial, sans-serif; /* Apply font settings */
+}
+
+/* Header Styling */
+header {
+    background-color: #4c5eaf; /* Header background colour */
+    color: #ffffff; /* Text colour */
+    padding: 20px; /* Space inside the header */
+    text-align: center; /* Center align the text */
+    position: relative; /* Allows positioning of child elements */
+}
+
+header h1 {
+    font-size: 2.5rem; /* Font size for the main title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+header p {
+    font-size: 1.2rem; /* Font size for the paragraph */
+}
+
+#clock {
+    font-size: 3rem; /* Font size for the clock */
+    position: absolute; /* Allows positioning within the header */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+}
+
+/* Navigation Menu */
+nav {
+    background-color: #333333; /* Navigation background colour */
+    padding: 10px; /* Space inside the navigation */
+}
+
+nav ul {
+    list-style: none; /* Remove bullets from the list */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the navigation items */
+}
+
+nav ul li {
+    margin: 0 15px; /* Space between navigation items */
+}
+
+nav ul li a {
+    color: white; /* Link text colour */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 1.1rem; /* Font size for links */
+    padding: 8px 15px; /* Space around links */
+    display: block; /* Makes the link fill the parent */
+}
+
+nav ul li a:hover {
+    background-color: #af4c65; /* Background colour on hover */
+    border-radius: 5px; /* Rounded corners on hover */
+}
+
+/* Main Content Styling */
+main {
+    padding: 20px; /* Space inside the main content */
+}
+
+/* Image Slider */
+.image-slider {
+    text-align: center; /* Center align the slider */
+    position: relative; /* Allows positioning of children */
+    max-width: 800px; /* Maximum width of the slider */
+    margin: 0 auto 50px; /* Center the slider with margin below */
+}
+
+.image-slider h2 {
+    margin-bottom: 10px; /* Space below the slider title */
+}
+
+.slides {
+    position: relative; /* Allows positioning of slides */
+    width: 100%; /* Full width of the parent */
+    height: 600px; /* Fixed height for the slides */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.slide {
+    display: none; /* Hide all slides by default */
+    width: 100%; /* Full width of the parent */
+    height: 100%; /* Full height of the parent */
+}
+
+.slide.active {
+    display: block; /* Show the active slide */
+}
+
+button.prev, button.next {
+    position: absolute; /* Position buttons within the slides */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Offset to truly centre */
+    background-color: rgba(0, 0, 0, 0.925); /* Semi-transparent background */
+    color: white; /* Text colour */
+    border: none; /* Remove border */
+    padding: 10px; /* Space inside the button */
+    cursor: pointer; /* Change cursor to pointer */
+    font-size: 1.5rem; /* Font size for the buttons */
+}
+
+button.prev {
+    left: 0; /* Position on the left */
+}
+
+button.next {
+    right: 0; /* Position on the right */
+}
+
+button.prev:hover, button.next:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}
+
+/* FAQ Section */
+.faq {
+    background-color: #ffffff; /* Background colour for FAQ */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Space inside FAQ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 50px; /* Space below the FAQ section */
+}
+
+.faq-item {
+    margin-bottom: 15px; /* Space below each FAQ item */
+}
+
+.faq-question {
+    font-weight: bold; /* Bold text for questions */
+    cursor: pointer; /* Change cursor to pointer */
+    padding: 10px; /* Space inside question */
+    background-color: #f9f9f9; /* Background colour for question */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.faq-question:hover {
+    background-color: #eaeaea; /* Change background on hover */
+}
+
+.faq-answer {
+    padding: 10px; /* Space inside answer */
+    display: none; /* Hide answers by default */
+}
+
+/* About Us Section */
+section h2 {
+    margin-bottom: 20px; /* Space below section titles */
+    color:#eaeaea; /* Colour for section titles */
+}
+
+/* Testimonial Blockquote Styling */
+blockquote {
+    background-color: #f9f9f9; /* Background colour for blockquote */
+    border-left: 5px solid #45a049; /* Left border for emphasis */
+    border-right: 7px solid #45a049; /* right border for emphasis
+    margin: 20px 0; /* Space above and below blockquote */
+    padding: 15px 20px; /* Space inside blockquote */
+    font-style: bold; /* Bold text */
+    color: white; /* Text colour */
+}
+blockquote footer {
+    text-align: right; /* Right align the footer of the blockquote */
+    font-weight: bold; /* Bold text for footer */
+    color: whitesmoke; /* Colour for footer text */
+}
+
+/* Scholar Link Styling */
+.scholar-link {
+    display: inline-block; /* Make the link block-level */
+    margin-top: 20px; /* Space above the link */
+    padding: 10px 15px; /* Space inside the link */
+    background-color: #534caf; /* Background colour for the link */
+    color: white; /* Text colour for the link */
+    text-decoration: none; /* Remove underline from the link */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.scholar-link:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Footer Section */
+footer {
+    position: relative; /* To position the video correctly */
+    padding: 20px; /* Add padding to footer */
+    background-color: rgba(36, 17, 122, 0.466); /* Background colour for footer with transparency */
+    color: white; /* Text colour for footer */
+    text-align: center; /* Centered text */
+    margin-top: 50px; /* Space above footer */
+}
+
+footer a {
+    color: white; /* Link text colour in footer */
+    text-decoration: none; /* Remove underline from footer links */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+
+footer ul {
+    list-style: none; /* Remove bullets from footer list */
+    padding: 0; /* Remove padding from footer list */
+}
+
+footer ul li {
+    display: inline; /* Display list items inline */
+    margin: 0 10px; /* Space between footer list items */
+}
+
+/* Footer Video Section *
+/* Footer Section Styling */
+footer {
+    background-color: #2c3e50; /* Dark background color */
+    color: white; /* White text for contrast */
+    padding: 20px;
+    text-align: center; /* Center-align text */
+}
+
+/* Video Container */
+.footer-video {
+    position: relative;
+    width: 100%; /* Full width */
+    max-width: 400px; /* Reduced maximum width for smaller video */
+    margin: 0 auto; /* Center the video */
+    overflow: hidden; /* Hide overflow */
+}
+
+/* Video Styling */
+.footer-video video {
+    width: 100%; /* Make video responsive */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below video */
+}
+
+/* Footer Content */
+.footer-content {
+    margin-top: 10px; /* Space above content */
+}
+
+/* Links Styling */
+.footer-content ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+}
+
+.footer-content li {
+    display: inline; /* Display list items inline */
+    margin: 0 15px; /* Space between links */
+}
+
+.footer-content a {
+    color: #ecf0f1; /* Light link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.footer-content a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

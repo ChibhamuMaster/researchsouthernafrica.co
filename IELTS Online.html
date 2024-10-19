@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://example.com/background.jpg'); /* Replace with your background image URL */
+            background-size: cover;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: auto;
+            display: none; /* Hide initially */
+        }
+        .question {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .option {
+            margin-left: 20px;
+            display: block;
+        }
+        #countdown {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #e63946;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .home-button {
+            background-color: #28a745;
+        }
+        .home-button:hover {
+            background-color: #218838;
+        }
+        .instructions {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h1>Quiz Instructions</h1>
+        <p>Welcome to the quiz! You will have 30 minutes to complete all the questions.</p>
+        <p>Please select the correct answer for each question.</p>
+        <p>Good luck!</p>
+        <button onclick="startQuiz()">Start Test</button>
+    </div>
+
+    <div class="quiz-container" id="quizContainer">
+        <h1>Quiz</h1>
+        <div id="countdown">30:00</div>
+        <div id="questionContainer"></div>
+        <button onclick="submitTest()">Submit Test</button>
+        <button class="home-button" onclick="goHome()">Back to Home</button>
+    </div>
+
+    <script>
+        // Sample questions array with additional questions
+        const questions = [
+            { question: "What is the capital of Australia?", options: ["Canberra", "Sydney", "Melbourne", "Brisbane"], answer: "Canberra" },
+            { question: "What is the largest planet in our solar system?", options: ["Earth", "Jupiter", "Saturn", "Mars"], answer: "Jupiter" },
+            { question: "Which element has the chemical symbol 'O'?", options: ["Gold", "Oxygen", "Silver", "Iron"], answer: "Oxygen" },
+            { question: "Who painted the Mona Lisa?", options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"], answer: "Leonardo da Vinci" },
+            { question: "What is the smallest prime number?", options: ["1", "2", "3", "5"], answer: "2" },
+            { question: "In which continent is the Sahara Desert located?", options: ["Asia", "Africa", "Australia", "North America"], answer: "Africa" },
+            { question: "Which gas do plants absorb from the atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], answer: "Carbon Dioxide" },
+            { question: "What is the main ingredient in guacamole?", options: ["Tomato", "Avocado", "Pepper", "Onion"], answer: "Avocado" },
+            { question: "What year did World War II end?", options: ["1945", "1944", "1939", "1950"], answer: "1945" },
+            { question: "Who wrote 'Pride and Prejudice'?", options: ["Emily Brontë", "Charlotte Brontë", "Jane Austen", "Mark Twain"], answer: "Jane Austen" },
+            { question: "What is the hardest natural substance on Earth?", options: ["Gold", "Iron", "Diamond", "Ruby"], answer: "Diamond" },
+            { question: "What is the freezing point of water?", options: ["0°C", "32°F", "100°C", "273.15 K"], answer: "0°C" },
+            { question: "Which planet is known for its rings?", options: ["Mars", "Jupiter", "Saturn", "Uranus"], answer: "Saturn" },
+            { question: "Who discovered penicillin?", options: ["Marie Curie", "Alexander Fleming", "Louis Pasteur", "Isaac Newton"], answer: "Alexander Fleming" },
+            { question: "What is the main language spoken in Brazil?", options: ["Spanish", "Portuguese", "English", "French"], answer: "Portuguese" },
+            { question: "What is the chemical formula for water?", options: ["H2O", "O2", "CO2", "HO2"], answer: "H2O" },
+            { question: "What is the largest mammal in the world?", options: ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"], answer: "Blue Whale" },
+            { question: "Which continent is known as the Dark Continent?", options: ["Asia", "Africa", "Australia", "South America"], answer: "Africa" },
+            { question: "Who was the first person to walk on the moon?", options: ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"], answer: "Neil Armstrong" },
+            { question: "Which is the longest river in the world?", options: ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"], answer: "Nile River" },
+            { question: "What is the capital of Japan?", options: ["Tokyo", "Beijing", "Seoul", "Bangkok"], answer: "Tokyo" },
+            { question: "Which element is represented by the symbol 'Na'?", options: ["Nitrogen", "Sodium", "Nickel", "Neon"], answer: "Sodium" },
+            { question: "Which planet is known as the Red Planet?", options: ["Mars", "Venus", "Saturn", "Jupiter"], answer: "Mars" }
+        ];
+
+        // Function to start the quiz
+        function startQuiz() {
+            document.querySelector('.instructions').style.display = 'none'; // Hide instructions
+            document.getElementById('quizContainer').style.display = 'block'; // Show quiz container
+            displayQuestions();
+            startTimer(30 * 60, document.getElementById('countdown'));
+        }
+
+        // Function to display questions
+        function displayQuestions() {
+            const questionContainer = document.getElementById('questionContainer');
+            questions.forEach((q, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `<strong>${index + 1}. ${q.question}</strong>`;
+                
+                q.options.forEach(option => {
+                    questionElement.innerHTML += `
+                        <div class="option">
+                            <input type="radio" name="question${index}" value="${option}" required> ${option}
+                        </div>`;
+                });
+
+                questionContainer.appendChild(questionElement);
+            });
+        }
+
+        // Function to start the countdown timer
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    alert("Time is up! Test submitted automatically.");
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        // Function to submit the test and display results
+        function submitTest() {
+            const results = [];
+            let score = 0;
+
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption) {
+                    results.push(selectedOption.value);
+                    if (selectedOption.value === q.answer) {
+                        score++;
+                    }
+                } else {
+                    results.push("Not answered");
+                }
+            });
+
+            alert(`Your score is ${score} out of ${questions.length}`);
+            goHome(); // Redirect to home after submission
+        }
+
+        // Function to navigate back to home
+        function goHome() {
+            // Redirect to home page (change URL as needed)
+            window.location.href = 'Main index.html'; // Replace with your home page URL
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Editors - Announcements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('abstract-colorful-background-holographic-modern-glowing-lines-4k-seamless-loop-motion-background-animation-video.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #sidebar {
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: rgba(2, 18, 27, 0.8);
+            border-right: 2px solid rgb(51, 2, 2);
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            padding: 10px;
+        }
+
+        #sidebar.minimized {
+            transform: translateX(-100%);
+        }
+
+        #toggleSidebar {
+            position: absolute;
+            top: 10px;
+            left: 210px; /* Adjust according to the sidebar width */
+            cursor: pointer;
+            background-color: rgb(36, 2, 2);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        #content {
+            margin-left: 220px; /* Adjust according to the sidebar width */
+            padding: 20px;
+            width: calc(100% - 240px); /* Adjust for sidebar width */
+        }
+
+        .link {
+            display: block;
+            background-color: rgb(255, 204, 204); /* Light red */
+            color: navy;
+            text-decoration: none;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .link:nth-child(odd) {
+            background-color: rgb(204, 255, 204); /* Light green */
+        }
+
+        .link:hover {
+            background-color: rgb(0, 162, 255); /* Bright blue on hover */
+            color: white;
+        }
+
+        .announcement {
+            display: none;
+            border: 2px solid rgb(0, 174, 255);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Light background for readability */
+            font-size: 20px;
+            color: rgb(1, 1, 27);
+            font-weight: bold;
+            font-style: normal;
+            animation: slideIn 1s forwards, slideOut 1s forwards;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(70%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(70%);
+                opacity: 0;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: rgb(0, 162, 255);
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgb(0, 60, 255);
+            color: silver;
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 80px;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar">
+        <button id="toggleSidebar">Toggle Sidebar</button>
+        <a href="Main index.html" class="link">Back to Home Page</a>
+        <a href="IELTS Online.html" class="link">Online test</a>
+        <a href="NMQ Research proposal submission.html" class="link">NMQ module</a>
+        <a href="Booking online tutorials.html" class="link">Request online assistance</a>
+    </div>
+
+    <div id="content">
+        <div class="announcement" id="announcement">
+            <strong>Important Announcement</strong><br><br>
+            Dear student,<br><br>
+            Starting from <strong>22 October</strong>, all our work will need to be verified and submitted through the <strong>Master Editors</strong> website. This change is aimed at enhancing the management of our projects and ensuring maximum efficiency in our workflow.<br><br>
+            In particular, the <strong>NMQ group for ELP</strong> will be the primary users of this platform, allowing them to easily upload and manage their submissions. The website will also feature summaries of our online class sessions, providing a quick reference for key topics discussed and ensuring everyone is aligned on expectations and content.<br><br>
+            We appreciate your cooperation as we transition to this new system and are confident that it will improve our collaboration.<br><br>
+            Best regards,<br>
+            Ben Chibhamu<br>
+            Tutor<br>
+            Master Editors<br>
+            Email: <a href="mailto:chibhamubenjuniortakunda@gmail.com">chibhamubenjuniortakunda@gmail.com</a>
+        </div>
+
+        <div class="buttons">
+            <a href="Main index.html" class="button">Back to Home Page</a>
+            <button class="button" onclick="toggleChat()">Chat</button>
+        </div>
+
+        <button class="chat-button" id="chatButton" onclick="openChat()">💬</button>
+    </div>
+
+    <script>
+        const announcement = document.getElementById('announcement');
+
+        // Function to show the announcement
+        function showAnnouncement() {
+            announcement.style.display = 'block';
+            announcement.style.animation = 'slideIn 1s forwards';
+            setTimeout(() => {
+                announcement.style.animation = 'slideOut 1s forwards';
+                setTimeout(() => {
+                    announcement.style.display = 'none';
+                    showAnnouncement(); // Repeat the announcement
+                }, 1000); // Time for slideOut animation to complete
+            }, 10000); // Time for announcement to be visible before sliding out
+        }
+
+        // Function to open the chat modal
+        function openChat() {
+            const chatModal = document.createElement('div');
+            chatModal.style.position = 'fixed';
+            chatModal.style.top = '50%';
+            chatModal.style.left = '50%';
+            chatModal.style.transform = 'translate(-50%, -50%)';
+            chatModal.style.width = '300px';
+            chatModal.style.height = '400px';
+            chatModal.style.border = '2px solid yellow';
+            chatModal.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            chatModal.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+            chatModal.style.zIndex = '1000';
+            chatModal.style.padding = '10px';
+            chatModal.style.display = 'flex';
+            chatModal.style.flexDirection = 'column';
+            chatModal.style.alignItems = 'center';
+
+            const chatHeader = document.createElement('h2');
+            chatHeader.innerText = 'Chat with Us';
+            chatModal.appendChild(chatHeader);
+
+            const chatMessages = document.createElement('div');
+            chatMessages.style.flex = '1';
+            chatMessages.style.overflowY = 'auto';
+            chatMessages.style.width = '100%';
+            chatMessages.style.border = '1px solid navy';
+            chatMessages.style.padding = '5px';
+            chatModal.appendChild(chatMessages);
+
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.placeholder = 'Enter your name...';
+            nameInput.style.width = '100%';
+            nameInput.style.marginTop = '10px';
+            nameInput.style.border = '1px solid navy';
+            nameInput.style.borderRadius = '5px';
+            chatModal.appendChild(nameInput);
+
+            const chatInput = document.createElement('input');
+            chatInput.type = 'text';
+            chatInput.placeholder = 'Type your message...';
+            chatInput.style.width = '100%';
+            chatInput.style.marginTop = '10px';
+            chatInput.style.border = '1px solid navy';
+            chatInput.style.borderRadius = '5px';
+            chatModal.appendChild(chatInput);
+
+            const sendButton = document.createElement('button');
+            sendButton.innerText = 'Send';
+            sendButton.style.marginTop = '10px';
+            sendButton.onclick = function () {
+                const message = document.createElement('div');
+                message.innerText = nameInput.value + ': ' + chatInput.value;
+                chatMessages.appendChild(message);
+                chatInput.value = '';
+            };
+            chatModal.appendChild(sendButton);
+
+            document.body.appendChild(chatModal);
+        }
+
+        // Initial announcement display
+        showAnnouncement();
+    </script>
+</body>
+</html>
